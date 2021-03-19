@@ -17,7 +17,7 @@ $mail->Port       = 587;
 $mail->Timeout = 120;
 $mail->SMTPDebug = 0;
 
-$mail->FromName = "Gaming together";
+$mail->FromName = "Games r us";
 
 $mail->IsHTML(true);
 
