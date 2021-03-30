@@ -5,6 +5,7 @@ $errors = array();
 include 'database.php';
 $db = mysqli_connect('localhost', 'root', '', 'computacaoNuvem');
 
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
