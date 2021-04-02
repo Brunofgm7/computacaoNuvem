@@ -2,7 +2,7 @@
 //Editar isto
 if (isset($_SESSION['username'])) {
 ?>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark corNav">
         <a class="navbar-brand" href="index.php">Games R Us</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -10,7 +10,7 @@ if (isset($_SESSION['username'])) {
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Games</a>
+                    <a class="nav-link" href="games.php">Games</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Players Online</a>
@@ -31,7 +31,7 @@ if (isset($_SESSION['username'])) {
                         ?>
                         <?php
                         if ($_SESSION['isAdmin'] == '1') { ?>
-                            <a class="dropdown-item" href="#">Manage Users</a>
+                            <a class="dropdown-item" href="manageusers.php">Manage Users</a>
                         <?php
                         }
                         ?>
@@ -45,7 +45,7 @@ if (isset($_SESSION['username'])) {
 <?php
 } else {
 ?>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark corNav">
         <a class="navbar-brand" href="index.php">Games R Us</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>

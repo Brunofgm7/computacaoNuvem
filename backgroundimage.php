@@ -8,6 +8,7 @@ include 'scripts.php';
 if (isset($_SESSION["username"])) {
     //verificar se o formulário foi submetido 
 
+
     //retirar os valores da base de dados associados ao nosso identificador
     $smt = $pdo->prepare('SELECT * FROM user WHERE username=?');
     $smt->execute([$_SESSION["username"]]);
@@ -18,7 +19,7 @@ if (isset($_SESSION["username"])) {
         exit("utlizador inexistente.");
     }
 } else {
-    header("location:login.php");
+    header("location:index.php");
 }
 ?>
 
@@ -27,7 +28,7 @@ if (isset($_SESSION["username"])) {
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Profile
+                    Background Image
                 </div>
                 <div class="card-body">
                     <?php include('errors.php'); ?>
