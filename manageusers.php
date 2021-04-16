@@ -5,10 +5,10 @@ include 'forms.php';
 include 'navbar.php';
 include 'scripts.php';
 
-
-if (!isset($_SESSION['isAdmin']) && !$_SESSION['isAdmin'] == '1') {
+if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] != '1') {
     header("location:index.php");
 }
+
 ?>
 
 <div class="container">
@@ -24,6 +24,7 @@ if (!isset($_SESSION['isAdmin']) && !$_SESSION['isAdmin'] == '1') {
         </thead>
         <tbody>
             <?php
+            include('errors.php');
             $db = mysqli_connect('localhost', 'root', '', 'computacaoNuvem');
 
             $sql = "SELECT * FROM user";
@@ -37,10 +38,10 @@ if (!isset($_SESSION['isAdmin']) && !$_SESSION['isAdmin'] == '1') {
                         <td class="align-middle"><?php echo $row["username"] ?></td>
                         <td class="align-middle"><?php echo $row["email"] ?></td>
                         <td class="align-middle">
-                            fazer reset password
                             <form action="manageusers.php" method="post">
                                 <input type="hidden" name="idUser" id="idUser" value="<?= $row["id"] ?>">
-                                <input type="submit" name="deleteUser" id="deleteUser" class="btn btn-danger" value="Delete" onclick="del()">
+                                <input type="submit" name="resetImageUser" id="resetImageUser" class="btn btn-warning" value="Reset Image" onclick="del()"  style="margin: 5px !important;">
+                                <input type="submit" name="deleteUser" id="deleteUser" class="btn btn-danger" value="Delete" onclick="del()" style="margin: 5px !important;">
                             </form>
                         </td>
                     </tr>

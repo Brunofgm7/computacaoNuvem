@@ -32,15 +32,18 @@ let playerXIcon = "fas fa-times"; //class name of fontawesome cross icon
 let playerOIcon = "far fa-circle"; //class name of fontawesome circle icon
 let playerSign = "X"; //this is a global variable beacuse we've used this variable inside multiple functions
 let runBot = true; //this also a global variable with boolen value..we used this variable to stop the bot once match won by someone or drawn
+let playerChoice = "X";
 
 // user click function
 function clickedBox(element){
     if(players.classList.contains("player")){
+        playerChoice="O";
         playerSign = "O"; //if player choose (O) then change playerSign to O
         element.innerHTML = `<i class="${playerOIcon}"></i>`; //adding circle icon tag inside user clicked element/box
         players.classList.add("active"); ///add active class in players
         element.setAttribute("id", playerSign); //set id attribute in span/box with player choosen sign
     }else{
+        playerChoice="X";
         element.innerHTML = `<i class="${playerXIcon}"></i>`; //adding cross icon tag inside user clicked element/box
         players.classList.add("active"); //add active class in players
         element.setAttribute("id", playerSign); //set id attribute in span/box with player choosen sign
@@ -93,6 +96,7 @@ function checkIdSign(val1, val2, val3, sign){ //checking all id value is equal t
     }
 }
 function selectWinner(){ //if the one of following winning combination match then select the winner
+    //console.log(playerChoice);
     if(checkIdSign(1,2,3,playerSign) || checkIdSign(4,5,6, playerSign) || checkIdSign(7,8,9, playerSign) || checkIdSign(1,4,7, playerSign) || checkIdSign(2,5,8, playerSign) || checkIdSign(3,6,9, playerSign) || checkIdSign(1,5,9, playerSign) || checkIdSign(3,5,7, playerSign)){
         runBot = false; //passing the false boolen value to runBot so bot won't run again
         bot(runBot); //calling bot function
@@ -101,6 +105,12 @@ function selectWinner(){ //if the one of following winning combination match the
             playBoard.classList.remove("show");
         }, 700); //1s = 1000ms
         wonText.innerHTML = `Player <p>${playerSign}</p> won the game!`; //displaying winning text with passing playerSign (X or O)
+        if(playerChoice == playerSign){
+            document.getElementById("winner").value = "player";
+        }else{
+            document.getElementById("winner").value = "bot";
+
+        }
     }else{ //if all boxes/element have id value and still no one win then draw the match
         if(getIdVal(1) != "" && getIdVal(2) != "" && getIdVal(3) != "" && getIdVal(4) != "" && getIdVal(5) != "" && getIdVal(6) != "" && getIdVal(7) != "" && getIdVal(8) != "" && getIdVal(9) != ""){
             runBot = false; //passing the false boolen value to runBot so bot won't run again
@@ -109,11 +119,12 @@ function selectWinner(){ //if the one of following winning combination match the
                 resultBox.classList.add("show");
                 playBoard.classList.remove("show");
             }, 700); //1s = 1000ms
-            wonText.textContent = "Match has been drawn!"; //displaying draw match text
+            wonText.textContent = "Draw!"; //displaying draw match text
+            document.getElementById("winner").value = "draw";
         }
     }
 }
-
+/*
 replayBtn.onclick = ()=>{
     window.location.reload(); //reload the current page on replay button click
-}
+}*/

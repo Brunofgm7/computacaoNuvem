@@ -21,10 +21,9 @@
     <div class="select-box">
         <header>Tic Tac Toe</header>
         <div class="content">
-        <div class="title">Select which you want to be?</div>
+        <div class="title" style="text-align:center;">Ready?</div>
         <div class="options">
-            <button class="playerX">Player (X)</button>
-            <button class="playerO">Player (O)</button>
+            <button class="start">Start</button>
         </div>
         </div>
     </div> 
@@ -58,14 +57,13 @@
     </div>
 
     <!-- result box -->
-    <form action="tictactoe.php" method="post">
+    <form action="tictactoeLocal.php" method="post">
     <div class="result-box">
         <div class="won-text"></div>      
-            <input type="hidden" name="winner" id="winner" value="">
-            <button type="submit" class="btn btn-primary" name="replay">Replay</button>
+            <button type="submit" class="btn btn-primary" name="replayLocal">Replay</button>
     </div>
     </form>
 
-    <script src="scriptTicTacToe.js"></script>
+    <script src="scriptTicTacToeLocal.js"></script>
     </div>
 </body>

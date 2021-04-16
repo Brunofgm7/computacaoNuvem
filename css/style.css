@@ -42,8 +42,20 @@
 .img {
   width: 400px !important;
 }
+
 .img_profile {
   width: 200px !important;
+  height: 200px !important;
+  cursor: pointer;
+}
+
+.img_profileChange {
+  width: 200px !important;
+  height: 200px !important;
+}
+
+.img_profile:hover {
+  opacity: 75%;
 }
 
 .margin {
@@ -289,3 +301,37 @@ hr {
 }
 
 /* end tic tac toe */
+
+.col-xxl-2 {
+  padding-top: 3%;
+}
+
+.col-md-12 {
+  padding-top: 3%;
+}
+
+/* HIDE RADIO */
+[type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+  outline: 2px solid #f00;
+}
+
+.online {
+  margin-right: 6%;
+}
+
+.bot {
+  margin-right: 6%;
+}

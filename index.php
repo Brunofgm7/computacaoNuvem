@@ -14,7 +14,6 @@ include 'scripts.php';
     <input type="button" value="Play Now!" class="btn btn-primary text-center" id="play" onClick="login.php" />
 </div>
 
-
 <?php
 
 include 'footer.php';

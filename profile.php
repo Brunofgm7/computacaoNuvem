@@ -35,11 +35,19 @@ if (isset($_SESSION["username"])) {
                         <div class="form-group row">
                             <div class="image-upload">
                                 <label for="fileToUpload">
-                                    <img src="<?= $utilizador['imagemPerfil'] ?>" class="rounded mx-auto d-block" />
+                                    <a href="changeProfilePic.php"><img src="<?= $utilizador['imagemPerfil'] ?>" class="rounded mx-auto d-block"></a>
                                 </label>
                                 <p class="label text-center">Change Picture</p>
                                 <input type="file" id="fileToUpload" name="fileToUpload" />
                                 <input type="hidden" name="photo" id="photo" value="<?= $utilizador['imagemPerfil'] ?>">
+                            </div>
+                            <div class="image-upload">
+                                <label for="fileToUpload">
+                                    <a href="changebackgroundimage.php"><img src="<?= $utilizador['backgroundImage'] ?>" class="rounded mx-auto d-block"></a>
+                                </label>
+                                <p class="label text-center">Change Background Image</p>
+                                <input type="file" id="fileToUpload" name="fileToUpload" />
+                                <input type="hidden" name="photo" id="photo" value="<?= $utilizador['backgroundImage'] ?>">
                             </div>
                         </div>
                         <div class="form-group row pt-4">
@@ -59,12 +67,6 @@ if (isset($_SESSION["username"])) {
                             <label for="pass" class="col-md-4 col-form-label text-md-right">Password</label>
                             <div class="col-md-6">
                                 <a class="btn btn-secondary btn-lg btn-block" href="changepassword.php" role="button">Change Password</a>
-                            </div>
-                        </div>
-                        <div class="form-group row pt-2">
-                            <label for="background" class="col-md-4 col-form-label text-md-right">Background</label>
-                            <div class="col-md-6">
-                                <a class="btn btn-secondary btn-lg btn-block" href="backgroundimage.php" role="button">Change Background Image</a>
                             </div>
                         </div>
                         <div class="form-group row pt-2">

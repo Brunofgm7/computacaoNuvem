@@ -10,6 +10,13 @@ if(isset($_GET['error1'])){
     array_push($errors, 'You can only play with an register account');
 }
 
+if (!isset($_SESSION["username"])) {
+    //Se não tiver sessão iniciada
+
+} else {
+    header("location:profile.php");
+}
+
 ?>
 
 

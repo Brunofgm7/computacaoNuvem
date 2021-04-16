@@ -4,7 +4,7 @@ if (isset($_SESSION['username'])) {
 ?>
 <nav class="navbar navbar-expand-md navbar-dark corNav">
         <a class="navbar-brand" href="index.php">Games R Us</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -13,7 +13,7 @@ if (isset($_SESSION['username'])) {
                     <a class="nav-link" href="games.php">Games</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Players Online</a>
+                    <a class="nav-link" href="playersOnline.php">Players Online</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
@@ -25,13 +25,19 @@ if (isset($_SESSION['username'])) {
                         <a class="dropdown-item" href="profile.php">Profile</a>
                         <?php
                         if ($_SESSION['isAdmin'] == '0') { ?>
-                            <a class="dropdown-item" href="#">Statistics</a>
+                            <a class="dropdown-item" href="matchhistory.php">Match History</a>
                         <?php
                         }
                         ?>
                         <?php
                         if ($_SESSION['isAdmin'] == '1') { ?>
                             <a class="dropdown-item" href="manageusers.php">Manage Users</a>
+                        <?php
+                        }
+                        ?>
+                        <?php
+                        if ($_SESSION['isAdmin'] == '1') { ?>
+                            <a class="dropdown-item" href="manageprofileimages.php">Manage Profile Pictures</a>
                         <?php
                         }
                         ?>

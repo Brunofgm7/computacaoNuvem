@@ -26,7 +26,7 @@ if (isset($_SESSION["username"])) {
 
 <div class="container">
     <div class="d-flex justify-content-center">
-        <a href="tictactoe.php"><h1> Tic Tac Toe </h1>
+        <a href="tictactoeOpponent.php"><h1> Tic Tac Toe </h1>
         <h2> por a imagem </h2></a>
     </div>
 </div>

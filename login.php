@@ -5,7 +5,14 @@ include 'forms.php';
 include 'navbar.php';
 include 'scripts.php';
 
+if (!isset($_SESSION["username"])) {
+    //Se não tiver sessão iniciada
+
+} else {
+    header("location:profile.php");
+}
 ?>
+
 
 <div class="container">
     <div class="row justify-content-center pt-4">
