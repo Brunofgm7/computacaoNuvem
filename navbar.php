@@ -3,15 +3,12 @@
 if (isset($_SESSION['username'])) {
 ?>
 <nav class="navbar navbar-expand-md navbar-dark corNav">
-        <a class="navbar-brand" href="index.php">Games R Us</a>
+        <a class="navbar-brand" href="index.php"><img src="logo/Games_R_Us_logo.png" style="width:150px"/></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="games.php">Games</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="playersOnline.php">Players Online</a>
                 </li>
@@ -37,7 +34,19 @@ if (isset($_SESSION['username'])) {
                         ?>
                         <?php
                         if ($_SESSION['isAdmin'] == '1') { ?>
-                            <a class="dropdown-item" href="manageprofileimages.php">Manage Profile Pictures</a>
+                            <a class="dropdown-item" href="manageprofileimages.php">Manage Profile</a>
+                        <?php
+                        }
+                        ?>
+                        <?php
+                        if ($_SESSION['isAdmin'] == '1') { ?>
+                            <a class="dropdown-item" href="managegames.php">Manage Games</a>
+                        <?php
+                        }
+                        ?>
+                        <?php
+                        if ($_SESSION['isAdmin'] == '1') { ?>
+                            <a class="dropdown-item" href="addgame.php">Add Game</a>
                         <?php
                         }
                         ?>
@@ -52,7 +61,7 @@ if (isset($_SESSION['username'])) {
 } else {
 ?>
     <nav class="navbar navbar-expand-md navbar-dark corNav">
-        <a class="navbar-brand" href="index.php">Games R Us</a>
+    <a class="navbar-brand" href="index.php"><img src="logo/Games_R_Us_logo.png" style="width:150px"/></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>

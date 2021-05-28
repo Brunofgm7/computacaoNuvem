@@ -1,9 +1,9 @@
 <?php
 
-    include 'database.php';
-    include 'forms.php';
-    include 'navbar.php';
-    include 'scripts.php';
+include 'database.php';
+include 'scripts.php';
+include 'forms.php';
+include 'navbar.php';
 
     if (!isset($_SESSION["username"])) {
         header("location:register.php?error1");

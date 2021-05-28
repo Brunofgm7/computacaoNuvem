@@ -1,9 +1,9 @@
 <?php
 
 include 'database.php';
+include 'scripts.php';
 include 'forms.php';
 include 'navbar.php';
-include 'scripts.php';
 
 if (isset($_SESSION["username"])) {
     //verificar se o formulário foi submetido

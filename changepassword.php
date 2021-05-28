@@ -22,14 +22,13 @@ if (isset($_SESSION["username"])) {
 }
 
 ?>
+<body style="background-image: url('bg_blue.jpg');" class="bgTTT">
 
 <div class="container">
     <div class="row justify-content-center pt-4">
+    <h1 class="text-center" style="padding-bottom:1%">Change profile picture</h1>
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    Change Password
-                </div>
+            <div class="card" style="background-color:rgba(0,0,0,0.1)">
                 <div class="card-body">
                     <?php include('errors.php'); ?>
                     <form action="changepassword.php" method="post">
@@ -53,7 +52,7 @@ if (isset($_SESSION["username"])) {
                         </div>
                         <div class="col-md-6 offset-md-5 pt-4">
                             <input type="hidden" name="key" value="<?= $key ?>">
-                            <button type="submit" class="btn btn-primary" name="changepassword">
+                            <button type="submit" class="btn btn-success" name="changepassword">
                                 Save
                             </button>
                         </div>

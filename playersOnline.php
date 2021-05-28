@@ -1,9 +1,9 @@
 <?php
 
 include 'database.php';
+include 'scripts.php';
 include 'forms.php';
 include 'navbar.php';
-include 'scripts.php';
 
 if (isset($_SESSION["username"])) {
     //verificar se o formulário foi submetido 
@@ -23,13 +23,18 @@ if (isset($_SESSION["username"])) {
 
 ?>
 
+<body style="background-image: url('blue_bg.png');" class="bgTTT">
+
 <div class="panel panel-default">
-    <div class="panel-heading">Players Online</div>
-    <div id="user_login_status" class="panel-body">
+    <div class="panel-heading"><h2 style="color:#f3a522; text-align:center; padding-top: 1%">Players Online</h2></div>
+    <div id="user_login_status" style="padding-left:20%; padding-right:20%; padding-top: 1%;">
 
     </div>
     </div>
 </div>
+
+</body>
+
 
 <script>
 $(document).ready(function(){
@@ -68,3 +73,7 @@ function fetch_user_login_data() {
 
 });
 </script>
+
+<?php
+include 'footer.php';
+?>

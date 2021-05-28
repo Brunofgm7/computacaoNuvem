@@ -3,7 +3,8 @@ session_start();
 $errors = array();
 
 include 'database.php';
-$db = mysqli_connect('localhost', 'root', '', 'computacaoNuvem');
+$db = mysqli_connect('localhost', 'root', '', 'computacaonuvem');
+// $db = mysqli_connect('localhost', 'root', '14751127', 'computacaonuvem');
 
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -239,8 +240,6 @@ if (isset($_POST['changeProfilePic'])) {
 
 // Change background Image
 
-// Change profile pic
-
 if (isset($_POST['changebackgroundimage'])) {
     $r = 1;
     $help = 0;
@@ -335,7 +334,7 @@ if (isset($_POST['recoverPassword'])) {
 
         $message = "To recover your password click the link below:
                 <br/>
-                <a href='https://localhost/computacaonuvem/resetpassword.php?key=$key'>Reset your password.</a><br/>
+                <a href='https://52.178.3.51/computacaonuvem/resetpassword.php?key=$key'>Reset your password.</a><br/>
                 <b>This is an automatic message, do not reply!</b><br/>
                 <b>If you didn't asked for a password reset, ignore this message.";
 
@@ -622,6 +621,134 @@ if (isset($_POST['changepassword'])) {
             } else {
                 array_push($errors, "User not found!");
             }
+        }
+    }
+}
+
+
+//Game disabled
+
+if (isset($_POST["gameDisabled"])) {
+    $idJogo = $_POST['idJogo'];
+    $sql = "SELECT * FROM tipoJogo WHERE id=$idJogo";
+    if ($result = $db->query($sql)) {
+        $query = "UPDATE tipoJogo SET available = 1 WHERE id=$idJogo";
+        $result = mysqli_query($db, $query);
+    }
+}
+
+//Game enabled
+
+if (isset($_POST["gameEnabled"])) {
+    $idJogo = $_POST['idJogo'];
+    $sql = "SELECT * FROM tipoJogo WHERE id=$idJogo";
+    if ($result = $db->query($sql)) {
+        $query = "UPDATE tipoJogo SET available = 0 WHERE id=$idJogo";
+        $result = mysqli_query($db, $query);
+    }
+}
+
+//add game
+
+if (isset($_POST["addGame"])) {
+
+    $nome = $_POST['gameName'];
+    $image = "gameImage/" . $_FILES["gameImage"]["name"];
+
+    $r = 1;
+
+    $target_dir = "gameImage/";
+    $target_file = $target_dir . basename($_FILES["gameImage"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    
+    $url = "";
+
+
+    $countfiles = count($_FILES['gameFile']['name']);
+
+    if (isset($_FILES) && $_FILES["gameImage"]["size"] > 0 && $_FILES['gameFile']['size'][0] > 1) {
+        // Check if image file is a actual image or fake image
+        $check = getimagesize($_FILES["gameImage"]["tmp_name"]);
+        if ($check !== false) {
+            $uploadOk = 1;
+        } else {
+            $r = 0;
+            array_push($errors, 'File is not an image.');
+            $uploadOk = 0;
+        }
+
+        // Check file size
+        if ($_FILES["gameImage"]["size"] > 500000) {
+            $r = 0;
+            array_push($errors, 'Sorry, your file is too large.');
+            $uploadOk = 0;
+        }
+
+        // Allow certain file formats
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+            $r = 0;
+            array_push($errors, 'Sorry, only JPG, JPEG, PNG files are allowed.');
+            $uploadOk = 0;
+        }
+
+        // Looping all files
+        for($i = 0; $i < $countfiles; $i++){
+            $filename = $_FILES['gameFile']['name'][$i];
+
+            $fileType = strtolower(pathinfo(basename($filename), PATHINFO_EXTENSION));
+
+            if($fileType != 'php' && $fileType != 'js'){
+                $r = 0;
+                array_push($errors, 'Sorry, only PHP, JS files are allowed.');
+                $uploadOk = 0;
+            }
+
+            if($fileType == 'php' && $url == ""){
+                $url = $filename;
+            }
+        }
+        
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            $r = 0;
+            array_push($errors, 'Sorry, your file was not uploaded.');
+            // if everything is ok, try to upload file
+        } else {
+            if (move_uploaded_file($_FILES["gameImage"]["tmp_name"], $target_file)) {
+                rename($target_dir . $_FILES["gameImage"]["name"], $target_dir . $_FILES["gameImage"]["name"] . ".jpg");
+                $image = $target_dir . $_FILES["gameImage"]["name"] . ".jpg";
+                
+                
+                for($i = 0; $i < $countfiles; $i++){
+                    $filename = $_FILES['gameFile']['name'][$i];
+                    
+                    // Upload file
+                    move_uploaded_file($_FILES['gameFile']['tmp_name'][$i], $filename);
+                    
+                }
+                
+                if ($_FILES["gameImage"]["name"] == "") {
+                    $r = 1;
+                }
+                if ($r == 1 && count($errors)==0) {
+            
+                    $smt = $pdo->prepare('INSERT INTO tipoJogo (nome, img, url, available) VALUES (?,?,?,?)');
+                    $smt->execute([$nome,$image,$url,1]);
+                    header('location: index.php');
+                }
+            } else {
+                $r = 0;
+                array_push($errors, 'Sorry, there was an error uploading your file.');
+            }
+        }
+    }else{
+        //array_push($errors, 'Sorry, there was an error uploading your file.');
+        if ($_FILES["gameImage"]["name"] == ""){
+            array_push($errors, 'Please, submit an image file.');
+        }
+        if($_FILES['gameFile']['size'][0] == 0){
+            array_push($errors, 'Please, submit an game file.');
         }
     }
 }

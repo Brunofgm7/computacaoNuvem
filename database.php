@@ -4,6 +4,7 @@ $DATABASE_HOST = "localhost";
 $DATABASE_NAME = "computacaonuvem";
 $DATABASE_USER = "root";
 $DATABASE_PASS = "";
+// $DATABASE_PASS = "14751127";
 $DATABASE_PORT = 3306;
 $ligacao = "mysql:host=" . $DATABASE_HOST . ";dbname=" . $DATABASE_NAME . ";port=" . $DATABASE_PORT . ";charset=utf8";
 try {

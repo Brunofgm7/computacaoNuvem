@@ -1,9 +1,9 @@
 <?php 
 
 include 'database.php';
+include 'scripts.php';
 include 'forms.php';
 include 'navbar.php';
-include 'scripts.php';
 
 
 if(isset($_GET['error1'])){
@@ -18,16 +18,14 @@ if (!isset($_SESSION["username"])) {
 }
 
 ?>
+<body style="background-image: url('bg_blue.jpg');" class="bgTTT">
 
-
-<div class="container">
+<div class="container" style="padding-bottom:5%; padding-top:2%">
+    <h1 class="text-center" style="padding-bottom:1%">Register</h1>
     <div class="row justify-content-center pt-4">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    Register
-                </div>
-                <div class="card-body">
+            <div class="card" style="background-color:rgba(0,0,0,0.1)">
+                <div class="card-body" style="font-size:22px">
                     <?php include('errors.php'); ?>
                     <form action="register.php" method="post">
                         <div class="form-group row">

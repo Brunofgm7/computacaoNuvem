@@ -25,11 +25,11 @@ if(isset($_POST["action"])) {
         $count = $statement->rowCount();
         ?>
         <div class="table-responsive">
-        <div class=align:right>
+        <div class=align:right style="color:black; font-weight:bold">
          <?= $count ?> Users Online
         </div>
-        <table class="table table-bordered table-striped">
-         <tr>
+        <table class="table table-bordered table-striped" style="background-color:#5776B6">
+         <tr style="color:#f3a522">
           <th>Username</th>
           <th>Image</th>
          </tr>
@@ -39,7 +39,7 @@ if(isset($_POST["action"])) {
         $i = $i + 1;
         ?>
             <tr> 
-            <td><?= $row["username"] ?></td>
+            <td style="color:white"><?= $row["username"] ?></td>
             <td><img src="<?= $row["imagemPerfil"] ?>" class="img-thumbnail" width="50" /></td>
             <!-- TODO (Convidar)-->
             </tr>

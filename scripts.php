@@ -7,5 +7,5 @@
 <script src="https://kit.fontawesome.com/a076d05399.js"></script> 
 
 <title>Games R Us</title>
-<link rel="shortcut icon" href="img/WebsiteIco.ico" />
+<link rel="shortcut icon" href="logo/icon.png" />
 <meta charset="UTF-8">

@@ -1,9 +1,9 @@
 <?php
 
 include 'database.php';
+include 'scripts.php';
 include 'forms.php';
 include 'navbar.php';
-include 'scripts.php';
 
 if (isset($_SESSION["username"])) {
     //verificar se o formulário foi submetido 
@@ -21,13 +21,12 @@ if (isset($_SESSION["username"])) {
     header("location:login.php");
 }
 ?>
+<body style="background-image: url('bg_blue.jpg');" class="bgTTT">
 
 <div class="container pt-4">
-        <div class="card">
-            <div class="card-header">
-                Change background Image
-            </div>
-            <div class="card-body">
+<h1 class="text-center" style="padding-bottom:1%">Change background image</h1>
+        <div class="card" style="background-color:rgba(0,0,0,0.1)"> 
+            <div class="card-body" >
                 <?php include('errors.php'); ?>
                 <form action="changebackgroundimage.php" method="post" enctype="multipart/form-data">
                 <div class="row">
@@ -44,7 +43,8 @@ if (isset($_SESSION["username"])) {
 
                     <?php
 
-                    $db = mysqli_connect('localhost', 'root', '', 'computacaoNuvem');
+                    $db = mysqli_connect('localhost', 'root', '', 'computacaonuvem');
+                    // $db = mysqli_connect('localhost', 'root', '14751127', 'computacaonuvem');
 
                     $sql = "SELECT * FROM backgroundimage";
                     if ($result = $db->query($sql)) {
@@ -65,7 +65,7 @@ if (isset($_SESSION["username"])) {
                     
                     <div class="form-group row pt-2">
                         <div class="col-md-12 text-center">
-                            <input type="submit" name="changebackgroundimage" id="changebackgroundimage" class="btn btn-dark" value="Change">
+                            <input type="submit" name="changebackgroundimage" id="changebackgroundimage" class="btn btn-success" value="Change">
                         </div>
                     </div>
                 </form>
