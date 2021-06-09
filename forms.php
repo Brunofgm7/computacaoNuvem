@@ -6,30 +6,13 @@ include 'database.php';
 $db = mysqli_connect('localhost', 'root', '', 'computacaonuvem');
 // $db = mysqli_connect('localhost', 'root', '14751127', 'computacaonuvem');
 
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
 require 'vendor/autoload.php';
-
-$mail = new PHPMailer(true);
-
-//Server settings
-$mail->isSMTP();                                            //Send using SMTP
-$mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-$mail->Username   = 'computacaonuvem3@gmail.com';                     //SMTP username
-$mail->Password   = 'computacao_nuvem7';                               //SMTP password
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-$mail->Port       = 587;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
-
 
 //Register
 
 if (isset($_POST['register'])) {
     $username = mysqli_real_escape_string($db, $_POST['user']);
-    $email = mysqli_real_escape_string($db, $_POST['email']);
+    $emailUser = mysqli_real_escape_string($db, $_POST['email']);
     $password = mysqli_real_escape_string($db, $_POST['password']);
     $password2 = mysqli_real_escape_string($db, $_POST['password2']);
     $userkey = password_hash($username . $password . date("Y/m/d"), PASSWORD_BCRYPT);
@@ -44,7 +27,7 @@ if (isset($_POST['register'])) {
 
     $sql = "SELECT * FROM user WHERE username = '$username'";
     $result = mysqli_query($db, $sql);
-    $sql2 = "SELECT * FROM user WHERE email = '$email'";
+    $sql2 = "SELECT * FROM user WHERE email = '$emailUser'";
     $result2 = mysqli_query($db, $sql2);
     if (mysqli_num_rows($result) >= 1) {
         array_push($errors, "Username already exist!");
@@ -58,27 +41,30 @@ if (isset($_POST['register'])) {
         $password_encriptada = password_hash($password, PASSWORD_BCRYPT);
         // insira o utilizador na BD
         $sql = "INSERT INTO user (username, email, password, imagemPerfil, vitorias, empates , derrotas, jogosFeitos, backgroundImage, contaVerificada ,isAdmin,userKey) 
-        VALUES ('$username','$email','$password_encriptada','profileP/stock.jpg','0','0','0','0','background/stock.png','0','0','$userkey')";
+        VALUES ('$username','$emailUser','$password_encriptada','profileP/stock.jpg','0','0','0','0','background/stock.png','0','0','$userkey')";
         mysqli_query($db, $sql);
 
-        $mail->setFrom('computacaonuvem3@gmail.com', 'Games R Us');
-        $mail->addAddress($email, $username);     //Add a recipient
-    
-        //Content
-        $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Register on Games R Us website';
+        $email = new \SendGrid\Mail\Mail(); 
+        $email->setFrom("computacaonuvem3@gmail.com", "Games R Us");
+        $email->setSubject("Register on Games R Us website");
+        $email->addTo($emailUser, $username);
+        $email->addContent(
+            "text/html", "<strong>Hello $username</strong>,<br />
+                        Thanks for registering on Games R Us website!<br />
+                        <strong>This is an automatic message, do not reply!</strong>"
+        );
+        $sendgrid = new \SendGrid('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');
+        try {
+            $response = $sendgrid->send($email);
+            print $response->statusCode() . "\n";
+            print_r($response->headers());
+            print $response->body() . "\n";
+        } catch (Exception $e) {
+            echo 'Caught exception: '. $e->getMessage() ."\n";
+        }
 
-        $message = "<strong>Hello $username</strong>,<br />
-                    Thanks for registering on Games R Us website!<br />
-                    <b>This is an automatic message, do not reply!</b>";
-
-        $mail->Body    = "<html><head><style>p{font-family:Arial;font-size:12px}</style></head><body>$message</body>";
-        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-    
-        $mail->send();
         header('location: login.php');
 
-        
     }
 }
 
@@ -318,30 +304,35 @@ if (isset($_POST['changebackgroundimage'])) {
 //recover password
 
 if (isset($_POST['recoverPassword'])) {
-    $email = mysqli_real_escape_string($db, $_POST['email']);
+    $emailUser = mysqli_real_escape_string($db, $_POST['email']);
 
-    $sql = "SELECT * FROM user WHERE email='$email'";
+    $sql = "SELECT * FROM user WHERE email='$emailUser'";
     if ($result = $db->query($sql)) {
         while ($row = $result->fetch_assoc()) {
             $key = $row['userKey'];
            
-            $mail->setFrom('computacaonuvem3@gmail.com', 'Games R Us');
-        $mail->addAddress($email);     //Add a recipient
-    
-        //Content
-        $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Recover password Games R Us';
 
-        $message = "To recover your password click the link below:
+            $email = new \SendGrid\Mail\Mail(); 
+            $email->setFrom("computacaonuvem3@gmail.com", "Games R Us");
+            $email->setSubject("Recover password Games R Us");
+            $email->addTo($emailUser);
+            $email->addContent(
+                "text/html", "To recover your password click the link below:
                 <br/>
-                <a href='https://52.178.3.51/computacaonuvem/resetpassword.php?key=$key'>Reset your password.</a><br/>
+                <a href='https://localhost/computacaonuvem/resetpassword.php?key=$key'>Reset your password.</a><br/>
                 <b>This is an automatic message, do not reply!</b><br/>
-                <b>If you didn't asked for a password reset, ignore this message.";
+                <b>If you didn't asked for a password reset, ignore this message."
+            );
+            $sendgrid = new \SendGrid('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');
+            try {
+                $response = $sendgrid->send($email);
+                print $response->statusCode() . "\n";
+                print_r($response->headers());
+                print $response->body() . "\n";
+            } catch (Exception $e) {
+                echo 'Caught exception: '. $e->getMessage() ."\n";
+            }
 
-        $mail->Body    = "<html><head><style>p{font-family:Arial;font-size:12px}</style></head><body>$message</body></html>";
-        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-    
-        $mail->send();
 
         header('location: login.php');
         }
@@ -404,7 +395,6 @@ if (isset($_POST['replay'])) {
 
         $smt = $pdo->prepare('INSERT INTO jogos (idVisitado, idVisitante, vencedor , idJogo) VALUES (?, ?, ?, ?)');
         $smt->execute([$idUser, '1',$idUser, '1']);
-
 
         $smt = $pdo->prepare('SELECT * FROM user WHERE username=?');
         $smt->execute([$username]);

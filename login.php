@@ -16,7 +16,7 @@ if (!isset($_SESSION["username"])) {
 
 
 <div class="container" style="padding-bottom:5%; padding-top:2%">
-<h1 class="text-center">Login</h1>
+<h1 class="text-center" style="padding-bottom:1%">Login</h1>
     <div class="row justify-content-center pt-4">
         <div class="col-md-8">
             <div class="card" style="background-color:rgba(0,0,0,0.1)">
