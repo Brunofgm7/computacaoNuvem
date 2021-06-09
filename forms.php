@@ -165,7 +165,7 @@ if (isset($_POST['changeProfilePic'])) {
         header('location: profile.php');
     }
 
-    $target_dir = "profileP/";
+    $target_dir = "./profileP/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -319,7 +319,7 @@ if (isset($_POST['recoverPassword'])) {
             $email->addContent(
                 "text/html", "To recover your password click the link below:
                 <br/>
-                <a href='https://52.178.3.51/resetpassword.php?key=$key'>Reset your password.</a><br/>
+                <a href='http://52.178.3.51/resetpassword.php?key=$key'>Reset your password.</a><br/>
                 <b>This is an automatic message, do not reply!</b><br/>
                 <b>If you didn't asked for a password reset, ignore this message."
             );
@@ -489,7 +489,7 @@ if (isset($_POST["resetImageUser"])) {
 
 if (isset($_POST["deleteProfileImage"])) {
     $idImage = $_POST['idImage'];
-    $sql = "SELECT * FROM profileImage WHERE id=$idImage";
+    $sql = "SELECT * FROM profileimage WHERE id=$idImage";
     if ($result = $db->query($sql)) {
         while ($row = $result->fetch_assoc()) { 
             if ($row['image'] != 'profileP/stock.jpg') {
@@ -500,7 +500,7 @@ if (isset($_POST["deleteProfileImage"])) {
         }
     }
 
-    $query = "DELETE FROM profileImage WHERE id=$idImage";
+    $query = "DELETE FROM profileimage WHERE id=$idImage";
     $result = mysqli_query($db, $query);
 }
 
@@ -555,7 +555,7 @@ if (isset($_POST["addProfileImage"])) {
                 }
                 if ($r == 1 && count($errors)==0) {
             
-                    $smt = $pdo->prepare('INSERT INTO profileImage (image) VALUES (?)');
+                    $smt = $pdo->prepare('INSERT INTO profileimage (image) VALUES (?)');
                     $smt->execute([$image]);
                     header('location: manageprofileimages.php');
                 }
@@ -620,9 +620,9 @@ if (isset($_POST['changepassword'])) {
 
 if (isset($_POST["gameDisabled"])) {
     $idJogo = $_POST['idJogo'];
-    $sql = "SELECT * FROM tipoJogo WHERE id=$idJogo";
+    $sql = "SELECT * FROM tipojogo WHERE id=$idJogo";
     if ($result = $db->query($sql)) {
-        $query = "UPDATE tipoJogo SET available = 1 WHERE id=$idJogo";
+        $query = "UPDATE tipojogo SET available = 1 WHERE id=$idJogo";
         $result = mysqli_query($db, $query);
     }
 }
@@ -631,9 +631,9 @@ if (isset($_POST["gameDisabled"])) {
 
 if (isset($_POST["gameEnabled"])) {
     $idJogo = $_POST['idJogo'];
-    $sql = "SELECT * FROM tipoJogo WHERE id=$idJogo";
+    $sql = "SELECT * FROM tipojogo WHERE id=$idJogo";
     if ($result = $db->query($sql)) {
-        $query = "UPDATE tipoJogo SET available = 0 WHERE id=$idJogo";
+        $query = "UPDATE tipojogo SET available = 0 WHERE id=$idJogo";
         $result = mysqli_query($db, $query);
     }
 }
@@ -722,8 +722,10 @@ if (isset($_POST["addGame"])) {
                     $r = 1;
                 }
                 if ($r == 1 && count($errors)==0) {
-            
-                    $smt = $pdo->prepare('INSERT INTO tipoJogo (nome, img, url, available) VALUES (?,?,?,?)');
+                    
+
+
+                    $smt = $pdo->prepare('INSERT INTO tipojogo (nome, img, url, available) VALUES (?,?,?,?)');
                     $smt->execute([$nome,$image,$url,1]);
                     header('location: index.php');
                 }

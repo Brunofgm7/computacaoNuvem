@@ -17,10 +17,11 @@ if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] != '1') {
     <table class="table table-active">
         <tbody>
             <?php
-            $db = mysqli_connect('localhost', 'root', '', 'computacaonuvem');
-            // $db = mysqli_connect('localhost', 'root', '14751127', 'computacaonuvem');
+            $db = mysqli_connect('localhost', 'root', '14751127', 'computacaonuvem');
+            //$db = mysqli_connect('localhost', 'root', '', 'computacaonuvem');
+            
 
-            $sql = "SELECT * FROM profileImage";
+            $sql = "SELECT * FROM profileimage";
             if ($result = $db->query($sql)) {
                 while ($row = $result->fetch_assoc()) {
 

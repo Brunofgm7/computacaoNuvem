@@ -17,8 +17,8 @@ if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] != '1') {
     <table class="table table-active">
         <tbody>
             <?php
-            $db = mysqli_connect('localhost', 'root', '', 'computacaonuvem');
-            // $db = mysqli_connect('localhost', 'root', '14751127', 'computacaonuvem');
+            //$db = mysqli_connect('localhost', 'root', '', 'computacaonuvem');
+            $db = mysqli_connect('localhost', 'root', '14751127', 'computacaonuvem');
 
             $sql = "SELECT * FROM tipojogo";
             if ($result = $db->query($sql)) {

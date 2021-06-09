@@ -26,10 +26,11 @@ if (isset($_SESSION["username"])) {
 <div class="container" style="padding-top: 40px;">
 <table>
 <tbody>
+<h1 style="color:#f3a522; text-align: center; padding-bottom: 5%" >Play with your friends and see who thrives!</h1>
 <?php
 
-$db = mysqli_connect('localhost', 'root', '', 'computacaonuvem');
-// $db = mysqli_connect('localhost', 'root', '14751127', 'computacaonuvem');
+//$db = mysqli_connect('localhost', 'root', '', 'computacaonuvem');
+$db = mysqli_connect('localhost', 'root', '14751127', 'computacaonuvem');
 $count = 0;
 
 $sql = "SELECT * FROM tipojogo";
@@ -38,7 +39,7 @@ if ($result = $db->query($sql)) {
         if($row["available"] == 1) {
             $count = 1;
         ?>
-        <h1 style="color:#f3a522; text-align: center; padding-bottom: 5%" >Play with your friends and see who thrives!</h1>
+        
         <tr>
         <div class="d-flex justify-content-center">
             <h1 style="color:#f3a522"><?= $row['nome'] ?></h1>
