@@ -21,8 +21,15 @@ if (isset($_SESSION["username"])) {
     header("location:login.php");
 }
 
+
 $totalwr = $utilizador['vitorias'] + $utilizador['derrotas'];
-$wr = $utilizador['vitorias'] * 100 / $totalwr;
+
+if($totalwr > 0) {
+    $wr = $utilizador['vitorias'] * 100 / $totalwr;
+    $wr = number_format($wr, 2);
+} else {
+    $wr = 0;
+}
 
 ?>
 
@@ -40,7 +47,7 @@ $wr = $utilizador['vitorias'] * 100 / $totalwr;
             </tr>
         </thead>
         <tbody>
-            <tr class="text-center">
+            <tr class="text-center" style="background-color: white">
                 <td><?= $utilizador['vitorias'] ?></td>
                 <td><?= $utilizador['empates'] ?></td>
                 <td><?= $utilizador['derrotas'] ?></td>
@@ -51,7 +58,7 @@ $wr = $utilizador['vitorias'] * 100 / $totalwr;
 
         <table class="table">
         <thead class="thead-light">
-            <tr class="text-center">
+            <tr class="text-center" style="color: white">
                 <th scope="col">Home</th>
                 <th scope="col">Score</th>
                 <th scope="col">Away</th>
@@ -62,7 +69,7 @@ $wr = $utilizador['vitorias'] * 100 / $totalwr;
         <?php
         $userid = $utilizador['id'];
         $sql = "SELECT * FROM jogos WHERE idVisitado = '$userid' or idVisitante = '$userid'";
-            if ($result = $db->query($sql) > 0) {
+            if ($result = $db->query($sql)) {
                 while ($row = $result->fetch_assoc()) {
                     if ($row['vencedor'] == $userid) {
         ?>
