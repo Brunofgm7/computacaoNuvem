@@ -3,8 +3,8 @@ session_start();
 $errors = array();
 
 include 'database.php';
-$db = mysqli_connect('localhost', 'root', '', 'computacaonuvem');
-// $db = mysqli_connect('localhost', 'root', '14751127', 'computacaonuvem');
+//$db = mysqli_connect('localhost', 'root', '', 'computacaonuvem');
+$db = mysqli_connect('localhost', 'root', '14751127', 'computacaonuvem');
 
 require 'vendor/autoload.php';
 
@@ -319,7 +319,7 @@ if (isset($_POST['recoverPassword'])) {
             $email->addContent(
                 "text/html", "To recover your password click the link below:
                 <br/>
-                <a href='https://localhost/computacaonuvem/resetpassword.php?key=$key'>Reset your password.</a><br/>
+                <a href='https://52.178.3.51/resetpassword.php?key=$key'>Reset your password.</a><br/>
                 <b>This is an automatic message, do not reply!</b><br/>
                 <b>If you didn't asked for a password reset, ignore this message."
             );

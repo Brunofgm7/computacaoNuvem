@@ -26,6 +26,8 @@ $wr = $utilizador['vitorias'] * 100 / $totalwr;
 
 ?>
 
+<body style="background-image: url('bg.png');" class="bgTTT">
+
 <div class="container pt-5">
     <?php include('errors.php'); ?>
     <table class="table">
@@ -59,8 +61,8 @@ $wr = $utilizador['vitorias'] * 100 / $totalwr;
 
         <?php
         $userid = $utilizador['id'];
-        $sql = "SELECT * FROM jogos WHERE idVisitado or idVisitante = '$userid'";
-            if ($result = $db->query($sql)) {
+        $sql = "SELECT * FROM jogos WHERE idVisitado = '$userid' or idVisitante = '$userid'";
+            if ($result = $db->query($sql) > 0) {
                 while ($row = $result->fetch_assoc()) {
                     if ($row['vencedor'] == $userid) {
         ?>

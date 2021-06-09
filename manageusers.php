@@ -26,8 +26,8 @@ if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] != '1') {
         <tbody>
             <?php
             include('errors.php');
-            $db = mysqli_connect('localhost', 'root', '', 'computacaonuvem');
-                    // $db = mysqli_connect('localhost', 'root', '14751127', 'computacaonuvem');
+                    //$db = mysqli_connect('localhost', 'root', '', 'computacaonuvem');
+                    $db = mysqli_connect('localhost', 'root', '14751127', 'computacaonuvem');
 
             $sql = "SELECT * FROM user";
             if ($result = $db->query($sql)) {

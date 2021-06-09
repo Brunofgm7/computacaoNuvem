@@ -43,8 +43,8 @@ if (isset($_SESSION["username"])) {
 
                     <?php
 
-                    $db = mysqli_connect('localhost', 'root', '', 'computacaonuvem');
-                    // $db = mysqli_connect('localhost', 'root', '14751127', 'computacaonuvem');
+                    //$db = mysqli_connect('localhost', 'root', '', 'computacaonuvem');
+                    $db = mysqli_connect('localhost', 'root', '14751127', 'computacaonuvem');
 
                     $sql = "SELECT * FROM profileimage";
                     if ($result = $db->query($sql)) {
